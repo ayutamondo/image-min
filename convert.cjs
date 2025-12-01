@@ -7,7 +7,7 @@ const sharp = require('sharp')
 const mode = process.env.npm_lifecycle_event
 
 // デフォルト値（変えたいならここを編集）
-const DEFAULT_MAX_SIZE = 1200 // min または mincomp のとき
+const DEFAULT_MAX_SIZE = 2000 // min または mincomp のとき
 const DEFAULT_QUALITY = 80 // comp または mincomp のとき
 
 let maxSize = null
