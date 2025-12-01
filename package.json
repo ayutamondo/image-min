@@ -1,0 +1,25 @@
+{
+  "name": "image-min",
+  "version": "1.0.0",
+  "description": "画像をJPGに変換します。",
+  "homepage": "https://github.com/ayutamondo/image-min#readme",
+  "bugs": {
+    "url": "https://github.com/ayutamondo/image-min/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayutamondo/image-min.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "scripts": {
+    "min": "node convert.cjs",
+    "comp": "node convert.cjs",
+    "mincomp": "node convert.cjs"
+  },
+  "dependencies": {
+    "heic-convert": "^2.1.0",
+    "sharp": "^0.34.5"
+  }
+}
