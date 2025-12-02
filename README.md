@@ -18,4 +18,6 @@ npm install
 | `npm run comp`    | ×                       | ○                     | JPEG 画像を品質 80%で圧縮する。サイズ変更はしない。  |
 | `npm run mincomp` | ○                       | ○                     | リサイズ（2000px）と圧縮（80%）の両方を実施する。    |
 
+`npm run mincomp -- refresh`のように最後に refresh をつけると dist ディレクトリを削除してから実行します。
+
 ※ HEIC は JPG に変換され、その後同様に処理されます

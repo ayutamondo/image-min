@@ -3,22 +3,22 @@ const path = require('path')
 const heicConvert = require('heic-convert')
 const sharp = require('sharp')
 
+// refresh オプション判定
+const args = process.argv.slice(2)
+const shouldDelete = args.includes('refresh')
+
 // どの npm script で実行されたか
 const mode = process.env.npm_lifecycle_event
 
 // デフォルト値（変えたいならここを編集）
-const DEFAULT_MAX_SIZE = 2000 // min または mincomp のとき
-const DEFAULT_QUALITY = 80 // comp または mincomp のとき
+const DEFAULT_MAX_SIZE = 2000
+const DEFAULT_QUALITY = 80
 
 let maxSize = null
 let quality = null
 
-if (mode === 'min') {
-  maxSize = DEFAULT_MAX_SIZE
-}
-if (mode === 'comp') {
-  quality = DEFAULT_QUALITY
-}
+if (mode === 'min') maxSize = DEFAULT_MAX_SIZE
+if (mode === 'comp') quality = DEFAULT_QUALITY
 if (mode === 'mincomp') {
   maxSize = DEFAULT_MAX_SIZE
   quality = DEFAULT_QUALITY
@@ -28,6 +28,15 @@ if (mode === 'mincomp') {
 const inputDir = path.join(__dirname, './image')
 const outputDir = path.join(inputDir, '../dist')
 
+// distフォルダを削除するオプション
+if (shouldDelete) {
+  if (fs.existsSync(outputDir)) {
+    fs.rmSync(outputDir, { recursive: true, force: true })
+    console.log('🗑️ dist フォルダを削除しました')
+  }
+}
+
+// dist 再作成
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true })
 }
@@ -99,7 +108,6 @@ fs.readdir(inputDir, async (err, files) => {
       }
 
       const outBuffer = await sharpImg.toBuffer()
-
       const outputPath = path.join(outputDir, `${baseName}${outputExt}`)
       fs.writeFileSync(outputPath, outBuffer)
 
